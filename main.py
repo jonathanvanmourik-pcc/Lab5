@@ -1,3 +1,52 @@
+#******************************************************************************
+# Author:           Jonathan van Mourik
+# Lab:              Lab 5
+# Date:             10/25/26
+# Description:      Basic Grade System
+# Input:            int: options selection, str: student name
+# Output:           Str: student name, Int: student grade
+# Sources:          Lab 5
+#******************************************************************************
+# intentionaly only whole numbers for grades
+# Password is pyth0nrul3s
+"""
+Welcome to the CIS-133Y grading system.
+Please enter the Super Secret Password: pyth0nrul3s
+
+ Welcome to the CIS-133Y grading system.
+0: View Grades
+1: Add Student
+2: Change Grade
+3: Exit
+
+Please enter the option you would like to use: 1
+
+Adding a New Student:
+Please enter the student's name: Jeff
+Please enter the student's grade: 54
+
+ Welcome to the CIS-133Y grading system.
+0: View Grades
+1: Add Student
+2: Change Grade
+3: Exit
+
+Please enter the option you would like to use: 0
+
+Student Grades:
+Jonathan: 100
+Tim: 50
+Frank: 0
+Jeff: 54
+
+ Welcome to the CIS-133Y grading system.
+0: View Grades
+1: Add Student
+2: Change Grade
+3: Exit
+
+Please enter the option you would like to use: 3
+"""
 import valid
 import printer
 
@@ -10,8 +59,6 @@ def main():
     PROMPTLIST = ["View Grades", "Add Student", "Change Grade", "Exit"]
     optionval = 0
     passwordval = False
-
-
 
     passwordval = print_intro(SUPERSECRETPASSWORD)
     while passwordval == True:
@@ -30,6 +77,7 @@ def main():
 
 
 def print_intro(SUPERSECRETPASSWORD):
+    #prints the intro and checks password
     passcode = ""
     optionval = 0
     repeatval = False
@@ -45,6 +93,7 @@ def print_intro(SUPERSECRETPASSWORD):
 
 
 def get_optionval(PROMPTLIST):
+    #gets options for the menu
     optionval = 0
 
     print("\n Welcome to the CIS-133Y grading system.")
@@ -53,6 +102,8 @@ def get_optionval(PROMPTLIST):
     return optionval
 
 def create_new_student(gradesdict):
+    #adds a student and coresponding grade into the dictionary
+    #intentionaly only whole numbers for grades
     nameval = ""
     gradeval = 0
     namecheckval = ""
@@ -67,21 +118,20 @@ def create_new_student(gradesdict):
         return gradesdict
 
 def change_student_grades(gradesdict):
+    #intentionaly only whole numbers for grades
+    #Changes the value of a students grade
     nameval = ""
-    namecheckval = ""
     gradeval = 0
 
     printer.print_dict(gradesdict)
     nameval = valid.get_string("Please enter the student's name whose grade you would like to change: ")
-    namecheckval = gradesdict.get(nameval)
-    if namecheckval in gradesdict:
-        print("\nStudent doesn't exist.")
-    else:
+    if nameval in gradesdict:
         gradeval = valid.get_integer_positive("Please enter the student's grade: ")
         gradesdict[nameval] = gradeval
         return gradesdict
-
-
+    else:
+        print("\nStudent doesn't exist.")
+        return gradesdict
 
 
 
